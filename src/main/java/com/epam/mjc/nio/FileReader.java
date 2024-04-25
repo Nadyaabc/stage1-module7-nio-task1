@@ -1,12 +1,14 @@
 package com.epam.mjc.nio;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-
+import java.util.logging.Logger;
 
 public class FileReader {
+    private static final Logger logger = Logger.getLogger(FileReader.class.getName());
 
     public Profile getDataFromFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -23,8 +25,8 @@ public class FileReader {
                 buffer.clear();
                 bytesRead = fileChannel.read(buffer);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            logger.info(e.getMessage());
         }
         String[] array;
         Profile profile;
